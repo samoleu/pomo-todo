@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Pomo Todo</title>
 </head>
 <body>
@@ -10,42 +11,50 @@
         <h1>Pomo Todo</h1>  
     </header>
     <main>
-        <section class="timer">
+        <section class="container-timer">
             <nav>
-                <ul>
+                <ul class="nav-timer">
                     <li>Work</li>
                     <li>Short Break</li>
                     <li>Long Break</li>
                 </ul>
             </nav>
-            <p>25:00</p>
-            <button>Start</button>
-            <button type="button">
-                <img src="./assets/media/img/setting-icon.svg" alt="settings icon">
-            </button>
+            <p id="timer">25:00</p>
+            <div class="container-btns-timer">
+                <button id="btn-controller-timer">START</button>
+                <button type="button" id="btn-setting">
+                    <img src="./assets/media/img/setting-icon.svg" alt="settings icon" id="icon-setting">
+                </button>
+            </div>
         </section>
+
         <section class="task-list">
-            <h2>Task List</h2>
+            <h2>Tasks</h2>
             <ul>
-                <li>
-                    <div class="container-pendent-task"></div>
-                        <input type="checkbox" id="checkbox-todo-task">
-                        <input type="text" id="input-add-task">
+                <li class="task-item">
+                    <div class="container-task">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="input">
+                            <span class="custom-checkbox"></span>
+                        </label>
+                        <input type="text" id="input-add-task" class="complete-task" value="Estudar">
                     </div>
                 </li>
-                <li>
-                    <div class="container-complete-task"></div>
-                        <input type="checkbox" id="checkbox-todo-task" checked>
-                        <input type="text" id="input-add-task">
+                <li class="task-item">
+                    <div class="container-task">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="input">
+                            <span class="custom-checkbox"></span>
+                        </label>
+                        <input type="text" id="input-add-task" value="Estudar">
                     </div>
                 </li>
             </ul>
             <div class="container-add-task">
-                <input type="text" id="input-add-task">
-                <img src="./assets/media/img/plus-icon.svg" alt="plus icon"> 
+                <img src="./assets/media/img/plus-icon.svg" alt="plus icon" id="icon-add-task"> 
+                <input type="text" id="input-new-task" placeholder="Add Task">
             </div>
         </section>
-
     </main>
 </body>
 </html>
