@@ -50,10 +50,6 @@ ul {
     cursor: pointer;
 }
 
-.nav-timer li:nth-child(1) {
-    background-color: #AB4343;
-}
-
 #timer {
     margin: 0;
     font-size: 7rem;
@@ -86,6 +82,29 @@ ul {
     bottom: 1.8rem; 
     right: 6rem;
     display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+
+    appearance: none;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    color: #BA4949;
+}
+
+
+#btn-reset img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+#btn-reset {
+    display: none;
+    position: absolute; 
+    bottom: 1.8rem; 
+    left: 6rem;
     width: 2rem;
     height: 2rem;
     align-items: center;
