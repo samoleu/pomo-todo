@@ -1,101 +1,117 @@
-const controllerTimeButton = document.getElementById("btn-controller-timer");
-const resetTimeButton = document.getElementById("btn-reset");
-const workTimer = document.getElementById("work-timer");
-const shortTimer = document.getElementById("short-break-timer");
-const longTimer = document.getElementById("long-break-timer");
-const timer = document.getElementById("timer");
+function timer(workTime= 1500, shortTime= 300, longTime= 900) {
+    
+    const timer = document.getElementById("timer");
+    const workTimerNavElement = document.getElementById("work-timer");
+    const shortTimerNavElement = document.getElementById("short-timer");
+    const longTimerNavElement = document.getElementById("long-timer");
+    const controllerTimeButton = document.getElementById("btn-controller-timer");
+    const resetTimeButton = document.getElementById("btn-reset");
+    let timeCounter = "";
+    let seconds = 0;
+    let selectedNavOption = "WorkTimer";
 
-workTimer.style.backgroundColor = "#AB4343";
+    const optionsSecondsTimes = {
+        "WorkTimer": workTime,
+        "ShortTimer": shortTime,
+        "LongTimer": longTime
+    };
 
-
-const optionsSecondsTimes = {
-    "WorkTimer": 1500,
-    "ShortTimer": 300,
-    "LongTimer": 900
-}
-let seconds = 1500;
-let selectedNavTimer = "WorkTimer";
-let timeCounter;
-
-
-function cleanBackgroundColor(element) {
-    element.style.backgroundColor = "";
-}
-
-function startTimeCounter() {
-    timeCounter = setInterval(() => {
+    const insertTextTimerCounter = (seconds) => {
         const minutes = Math.floor(seconds / 60);
         const remainderSeconds = seconds % 60;
-        timer.textContent = `${minutes}:${remainderSeconds < 10 ? "0" : ""}${remainderSeconds}`;
-        seconds--;
-    }, 1000);
-
-    setTimeout(timeCounter, seconds * 1000);
-}
-
-function stopTimeCounter() {
-    clearInterval(timeCounter);
-}
-
-workTimer.addEventListener("click", (e) => {
-    workTimer.style.backgroundColor = "#AB4343";
-    [shortTimer, longTimer].forEach((element) => cleanBackgroundColor(element));
-    timer.textContent = "25:00";
-    selectedNavTimer = "WorkTimer";
-    seconds = optionsSecondsTimes["WorkTimer"];
-    stopTimeCounter();
-
-})
-
-shortTimer.addEventListener("click", (e) => {
-    shortTimer.style.backgroundColor = "#AB4343";
-    [workTimer, longTimer].forEach((element) => cleanBackgroundColor(element));
-    timer.textContent = "05:00";
-    selectedNavTimer = "ShortTimer";
-    seconds = optionsSecondsTimes["ShortTimer"];
-    stopTimeCounter();
-
-})
-
-longTimer.addEventListener("click", (e) => {
-    longTimer.style.backgroundColor = "#AB4343";
-    [shortTimer, workTimer].forEach((element) => cleanBackgroundColor(element));
-    timer.textContent = "15:00";
-    selectedNavTimer = "LongTimer";
-    seconds = optionsSecondsTimes["LongTimer"];
-    stopTimeCounter();
-
-})
-
-function resetTimeCounter() {
-    clearInterval(timeCounter);
-    console.log(optionsSecondsTimes[selectedNavTimer]);
-    seconds = optionsSecondsTimes[selectedNavTimer]
-    timer.textContent = "25:00";
-    toggleViewButtonResetTime();
-    controllerTimeButton.textContent = "Start";
-}
-
-function toggleViewButtonResetTime() {
-    if (resetTimeButton.style.display === "none" || resetTimeButton.style.display === "") {
-        resetTimeButton.style.display = "flex";
-    } else {
-        resetTimeButton.style.display = "none";
+        timer.textContent = `${minutes < 10 ? "0" : ""}${minutes}:${remainderSeconds < 10 ? "0" : ""}${remainderSeconds}`;
     }
-}
 
-controllerTimeButton.addEventListener("click", (e) => {
-    if(controllerTimeButton.textContent === "Start") {
-        console.log("start");
-        startTimeCounter();
-        toggleViewButtonResetTime();
+    const toggleViewButtonResetTime = (state) => {
+        if (state === true) {
+            resetTimeButton.style.display = "flex";
+        } else if (state === false) {
+            resetTimeButton.style.display = "none";
+        }
+    }
+
+    const startTimeCounter = () => {
+        timeCounter = setInterval(() => {
+            insertTextTimerCounter(seconds);
+            seconds--;
+        }, 1000);
         controllerTimeButton.textContent = "Pause";
-    } else {
-        stopTimeCounter();
+    }
+
+    const pauseTimeCounter = () => {
+        clearInterval(timeCounter);
         controllerTimeButton.textContent = "Start";
     }
-});
 
-resetTimeButton.addEventListener("click", (e) => {
-    resetTimeCounter();
-});
+    const resetTimeCounter = () => {
+        clearInterval(timeCounter);
+        seconds = optionsSecondsTimes[selectedNavOption];
+        insertTextTimerCounter(optionsSecondsTimes[selectedNavOption]);
+        controllerTimeButton.textContent = "Start";
+        toggleViewButtonResetTime(false);
+    }
+
+    const navegation = (selectedNavTimer) => {
+        switch (selectedNavTimer) {
+            case "work-timer":
+                workTimerNavElement.classList.add("bg-nav-timer");
+                shortTimerNavElement.classList.remove("bg-nav-timer");
+                longTimerNavElement.classList.remove("bg-nav-timer");
+                resetTimeCounter();
+                toggleViewButtonResetTime(false);
+                break;
+            case "short-timer":
+                shortTimerNavElement.classList.add("bg-nav-timer");
+                workTimerNavElement.classList.remove("bg-nav-timer");
+                longTimerNavElement.classList.remove("bg-nav-timer");
+                resetTimeCounter();
+                toggleViewButtonResetTime(false);
+
+                break;
+            case "long-timer":
+                longTimerNavElement.classList.add("bg-nav-timer");
+                workTimerNavElement.classList.remove("bg-nav-timer");
+                shortTimerNavElement.classList.remove("bg-nav-timer");
+                resetTimeCounter();
+                toggleViewButtonResetTime(false);
+                break;
+            default:
+                console.log("ERROR: Selected navegation timer not exist");
+                break;
+        }
+    }
+
+    const init = () => {
+        navegation("work-timer");
+
+        workTimerNavElement.addEventListener("click", (e) => {
+            navegation("work-timer");
+            insertTextTimerCounter(optionsSecondsTimes["WorkTimer"]);
+        });
+        
+        shortTimerNavElement.addEventListener("click", (e) => {
+            navegation("short-timer");
+            insertTextTimerCounter(optionsSecondsTimes["ShortTimer"]);
+        });
+        
+        longTimerNavElement.addEventListener("click", (e) => {
+            navegation("long-timer");
+            insertTextTimerCounter(optionsSecondsTimes["LongTimer"]);
+        });
+        
+        controllerTimeButton.addEventListener("click", (e) => {
+            if(controllerTimeButton.textContent === "Start") {
+                startTimeCounter();
+            } else {
+                pauseTimeCounter();
+            }
+            toggleViewButtonResetTime(true);
+        });
+        
+        resetTimeButton.addEventListener("click", (e) => {
+           resetTimeCounter();
+        });
+    }
+
+    return { init }
+}
