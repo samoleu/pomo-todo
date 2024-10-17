@@ -6,6 +6,7 @@ function timer(workTime= 1500, shortTime= 300, longTime= 900) {
     const longTimerNavElement = document.getElementById("long-timer");
     const controllerTimeButton = document.getElementById("btn-controller-timer");
     const resetTimeButton = document.getElementById("btn-reset");
+    const audio = document.getElementById("player");
     let timeCounter = "";
     let seconds = 0;
     let selectedNavOption = "WorkTimer";
@@ -34,6 +35,9 @@ function timer(workTime= 1500, shortTime= 300, longTime= 900) {
         timeCounter = setInterval(() => {
             insertTextTimerCounter(seconds);
             seconds--;
+            if(seconds < 0) {
+                completeTime();
+            }
         }, 1000);
         controllerTimeButton.textContent = "Pause";
     }
@@ -48,6 +52,14 @@ function timer(workTime= 1500, shortTime= 300, longTime= 900) {
         seconds = optionsSecondsTimes[selectedNavOption];
         insertTextTimerCounter(optionsSecondsTimes[selectedNavOption]);
         controllerTimeButton.textContent = "Start";
+        toggleViewButtonResetTime(false);
+    }
+
+    const completeTime = () => {
+        clearInterval(timeCounter);
+        audio.play();
+        controllerTimeButton.textContent = "Start";
+        seconds = optionsSecondsTimes[selectedNavOption];
         toggleViewButtonResetTime(false);
     }
 
