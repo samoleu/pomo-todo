@@ -59,6 +59,8 @@ function timer(workTime= 1500, shortTime= 300, longTime= 900) {
                 longTimerNavElement.classList.remove("bg-nav-timer");
                 resetTimeCounter();
                 toggleViewButtonResetTime(false);
+                seconds = optionsSecondsTimes["WorkTimer"]
+                selectedNavOption = "WorkTimer"
                 break;
             case "short-timer":
                 shortTimerNavElement.classList.add("bg-nav-timer");
@@ -66,7 +68,8 @@ function timer(workTime= 1500, shortTime= 300, longTime= 900) {
                 longTimerNavElement.classList.remove("bg-nav-timer");
                 resetTimeCounter();
                 toggleViewButtonResetTime(false);
-
+                seconds = optionsSecondsTimes["ShortTimer"]
+                selectedNavOption = "ShortTimer"
                 break;
             case "long-timer":
                 longTimerNavElement.classList.add("bg-nav-timer");
@@ -74,6 +77,8 @@ function timer(workTime= 1500, shortTime= 300, longTime= 900) {
                 shortTimerNavElement.classList.remove("bg-nav-timer");
                 resetTimeCounter();
                 toggleViewButtonResetTime(false);
+                seconds = optionsSecondsTimes["LongTimer"]
+                selectedNavOption = "LongTimer"
                 break;
             default:
                 console.log("ERROR: Selected navegation timer not exist");
