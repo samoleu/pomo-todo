@@ -124,20 +124,16 @@ ul {
 }
 
 
-.task-list {
+.task-list-container {
     margin: 2rem 0;
     color: white;
 }
 
-.task-list h2 {
+.task-list-container h2 {
     border-bottom: 0.1rem solid white;
     padding-bottom: 1rem;
 }
 
-
-.task-item {
-    margin-bottom: 15px;
-}
 
 .container-task {
     display: flex;
@@ -145,18 +141,20 @@ ul {
     background-color: #AB4343; 
     padding: 0.8rem;
     border-radius: 0.5rem;
+    margin-bottom: 15px;
 }
 
 #checkbox-todo-task {
     margin-right: 10px;
 }
 
-#input-add-task {
+.input-add-task {
     background-color: transparent;
     border: none;
     color: white;
     width: 100%;
     outline: none;
+    margin: 0.1rem;
 }
 
 .complete-task {
@@ -164,7 +162,22 @@ ul {
     opacity: 0.6;
 }
 
-.container-add-task {
+.btn-delete-task {
+    background-color: transparent;
+    border: none;
+    color: #d18a8a;
+    cursor: pointer;
+}
+
+.btn-delete-task p {
+    margin: 0;
+}
+
+.btn-delete-task:hover {
+    color: white;
+}
+
+#container-add-task {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -196,7 +209,7 @@ ul {
 
 
 /* From Uiverse.io by PriyanshuGupta28 */ 
-.input[type="checkbox"] {
+.input-checkbox[type="checkbox"] {
     display: none;
 }
 
@@ -229,10 +242,11 @@ ul {
 
 
     /* Show the checkmark when checkbox is checked */
-.input[type="checkbox"]:checked + .custom-checkbox::after {
+.input-checkbox[type="checkbox"]:checked + .custom-checkbox::after {
     opacity: 1;
 }
 
 .bg-nav-timer {
     background-color: #AB4343;
 }
+

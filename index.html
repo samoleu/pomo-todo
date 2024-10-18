@@ -29,36 +29,33 @@
             </div>
         </section>
 
-        <section class="task-list">
+        <section class="task-list-container">
             <h2>Tasks</h2>
-            <ul>
-                <li class="task-item">
+            <ul id="task-list">
+                <!-- <li class="task-item">
                     <div class="container-task">
                         <label class="checkbox-label">
-                            <input type="checkbox" class="input">
+                            <input type="checkbox" class="input-checkbox">
                             <span class="custom-checkbox"></span>
                         </label>
-                        <input type="text" id="input-add-task" class="complete-task" value="Estudar">
+                        <p type="text" class="input-add-task"> Task Test</p>
+                        <button class="btn-delete-task">
+                            <p>Delete</p>
+                        </button>
                     </div>
-                </li>
-                <li class="task-item">
-                    <div class="container-task">
-                        <label class="checkbox-label">
-                            <input type="checkbox" class="input">
-                            <span class="custom-checkbox"></span>
-                        </label>
-                        <input type="text" id="input-add-task" value="Estudar">
-                    </div>
-                </li>
+                </li> -->
             </ul>
-            <div class="container-add-task">
-                <img src="./assets/media/img/plus-icon.svg" alt="plus icon" id="icon-add-task"> 
-                <input type="text" id="input-new-task" placeholder="Add Task">
-            </div>
+            <form id="container-add-task" action="/">
+                <label for="input-new-task">
+                    <img src="./assets/media/img/plus-icon.svg" alt="plus icon" id="icon-add-task"> 
+                </label>
+                <input type="text" name="input-new-task" id="input-new-task" placeholder="Add Task">
+            </form>
         </section>
     </main>
 
     <script src="./assets/js/timer.js"></script>
+    <script src="./assets/js/taskList.js"></script>
     <script src="./assets/js/index.js"></script>
 
 </body>
