@@ -10,11 +10,13 @@ html{
 body {
     background-color: #BA4949;
     width: 52rem;
+    max-width: calc(100% - 2rem);
     margin: 0 auto;
 }
 
 main {
     width: 32rem;
+    max-width: calc(100% - 2rem);
     margin: 0 auto;
 }
 
@@ -30,7 +32,7 @@ ul {
     border-radius: 0.5rem;
     align-items: center;
     justify-content: center;
-    position: relative;
+    max-width: calc(100% - 2rem);
 }
 
 .nav-timer {
@@ -75,25 +77,8 @@ ul {
     flex-direction: row;
     align-items: center;
     margin-bottom: 1rem;
+    position: relative;
 }
-
-#btn-setting {
-    position: absolute; 
-    bottom: 1.8rem; 
-    right: 6rem;
-    display: flex;
-    width: 2rem;
-    height: 2rem;
-    align-items: center;
-    justify-content: center;
-
-    appearance: none;
-    border-style: none;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    color: #BA4949;
-}
-
 
 #btn-reset img {
     width: 1.5rem;
@@ -104,7 +89,8 @@ ul {
     display: none;
     position: absolute; 
     bottom: 1.8rem; 
-    left: 6rem;
+    left: -2.5rem;
+    top: 0.8rem;
     width: 2rem;
     height: 2rem;
     align-items: center;
@@ -117,12 +103,10 @@ ul {
     color: #BA4949;
 }
 
-
 #btn-setting img {
     width: 2.2rem;
     height: 2.2rem;
 }
-
 
 .task-list-container {
     margin: 2rem 0;
@@ -133,7 +117,6 @@ ul {
     border-bottom: 0.1rem solid white;
     padding-bottom: 1rem;
 }
-
 
 .container-task {
     display: flex;
@@ -250,3 +233,60 @@ ul {
     background-color: #AB4343;
 }
 
+@media screen and (max-width: 556px) {
+    .nav-timer {
+        margin: 0.5rem 2rem 0 2rem;
+    }
+}
+
+
+@media screen and (max-width: 460px) {
+
+    #timer {
+        font-size: 5rem;
+    }
+    
+    .nav-timer {
+        margin: 0.5rem 1.5rem 0 1.5rem;
+    }
+
+    .nav-timer li {
+        font-size: 0.8rem;
+    }
+
+    #btn-controller-timer {
+        padding: 0.5rem 2rem;
+        font-size: 1rem;
+    }
+
+    #btn-reset img {
+        width: 1rem;
+        height: 1rem;
+    }
+    
+    #btn-reset {
+        left: -2rem;
+        top: 0.3rem;
+        width: 1.5rem;
+        height: 1.5rem;
+
+    }
+
+}
+
+@media screen and (max-width: 410px) {
+
+    .nav-timer li {
+        font-size: 0.6rem;
+    }
+
+    #timer {
+        font-size: 4rem;
+    }
+
+    #btn-controller-timer {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.8rem;
+    }
+
+}
