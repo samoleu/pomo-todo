@@ -49,6 +49,7 @@ function taskList() {
         const newTask = factoryTask(taskText);
         taskList.appendChild(newTask);
         attachTaskEvents(newTask);
+        saveTasks();
         return newTask;
     }
 
@@ -60,17 +61,52 @@ function taskList() {
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {
                 inputTextElement.classList.add("complete-task");
+                saveTasks();
             } else {
                 inputTextElement.classList.remove("complete-task");
+                saveTasks();
             }
         });
 
         deleteButton.addEventListener('click', () => {
             taskList.removeChild(taskItem);
+            saveTasks();
+        });
+    }
+
+    const saveTasks = () => {
+        const tasks = [];
+        const taskItems = taskList.querySelectorAll('.task-item');
+        taskItems.forEach((taskItem) => {
+            const inputTextElement = taskItem.querySelector('.input-add-task');
+            const taskText = inputTextElement.textContent;
+            const isTaskCompleted = inputTextElement.classList.contains('complete-task');
+            tasks.push([taskText, isTaskCompleted]);
+        });
+        
+        const tasksJSON = JSON.stringify(tasks);
+        localStorage.setItem('tasks', tasksJSON);
+    }
+
+    const loadTasks = () => {
+        const tasksJSON = localStorage.getItem('tasks');
+        if (tasksJSON === null) {
+            return;
+        }
+        const tasks = JSON.parse(tasksJSON);
+        tasks.forEach((task) => {
+            const createdTask = addTask(task[0]);
+            if (task[1]) {
+                const checkbox = createdTask.querySelector('.input-checkbox');
+                checkbox.checked = true;
+                const inputTextElement = createdTask.querySelector('.input-add-task');
+                inputTextElement.classList.add('complete-task');
+            }
         });
     }
     
     const init = () => {
+        loadTasks();
         formAddTask.addEventListener('submit', (e) => {
             e.preventDefault();
             if(inputNewTask.value.trim() === '') {
